@@ -1,0 +1,45 @@
+#!/usr/bin/env ruby
+
+$passed = true
+
+def assert(statement, message)
+    if (not statement)
+        puts "pre-commit script check failed:\n #{message}"
+        $passed = false
+    end
+end
+
+def space_check(filename)
+    File.open(filename, "r") do |file|
+        linenum = 1
+        while (not file.eof?)
+            assert(
+                (not (file.gets() =~ /^[ ]{4}/)),
+                "Leading spaces at #{filename}:#{linenum}"
+            )
+
+            linenum = linenum.next
+        end
+    end
+end
+
+def deleted?(status)
+    status == "D"
+end
+
+def source_file?(name)
+    name =~ /\.(h|c|hpp|cpp|hxx|cxx)/
+end
+
+entries=`git diff-index --name-status HEAD --`.split("\n")
+
+entries.each do |entry|
+    status, filename = entry.split("\t")
+    puts "checking file: #{filename}, status: #{status}"
+
+    if (not deleted? status and source_file? filename)
+        space_check(filename)
+    end
+end
+
+exit $passed ? 0 : 1
