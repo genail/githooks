@@ -8,14 +8,10 @@ class CopyTest < Test
     
     @@regexb = Regexp.new( /[cC]opyright.+(\d{4})/ );
     
-    @curr_year = Time.new.year
+    @@curr_year = Time.new.year
     
     def initialize()
         super()
-    end
-    
-    def error(filename, line)
-        puts "#{filename}:#{line}: invalid copyright entry"
     end
     
     def perform(commit_info)
