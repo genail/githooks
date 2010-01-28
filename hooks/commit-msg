@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH << ".git/hooks"
+
+require 'tests/message_test.rb'
+
+message_test = MessageTest.new
+
+File.open(ARGV[0], "r") do |file|
+    message_test.perform(file.read());
+end
+
+if message_test.pass?
+    exit 0
+else
+    exit 1
+end

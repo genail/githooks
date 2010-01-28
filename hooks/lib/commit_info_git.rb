@@ -12,6 +12,14 @@ class CommitInfoGit < CommitInfo
         @new_files_res
     end
     
+    def commit_message
+        @commit_message
+    end
+    
+    def commit_message=(msg)
+        @commit_message = msg
+    end
+    
     def diff_files()
         if @diff_files_res.nil?
             @diff_files_res = %x[git diff-index HEAD --].split("\n")

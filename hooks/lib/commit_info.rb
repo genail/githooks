@@ -8,6 +8,10 @@ class CommitInfo
         raise NotImplementedError
     end
     
+    def commit_message()
+        raise NotImplementedError
+    end
+    
     def modified_files()
         raise NotImplementedError
     end
