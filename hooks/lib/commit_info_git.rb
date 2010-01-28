@@ -1,4 +1,4 @@
-require 'commit_info.rb'
+require 'lib/commit_info.rb'
 
 class CommitInfoGit < CommitInfo
     def initialize()
@@ -6,7 +6,7 @@ class CommitInfoGit < CommitInfo
     
     def new_files()
         if @new_files_res.nil?
-            seperate_files()
+            separate_files()
         end
         
         @new_files_res
@@ -22,7 +22,17 @@ class CommitInfoGit < CommitInfo
     
     def diff_files()
         if @diff_files_res.nil?
-            @diff_files_res = %x[git diff-index HEAD --].split("\n")
+        
+            %x[git-rev-parse --verify HEAD]
+        
+            against = nil
+            if $?.success?
+                against = "HEAD"
+            else
+                against = "4b825dc642cb6eb9a060e54bf8d69288fbee4904"
+            end
+            
+            @diff_files_res = %x[git diff-index #{against} --].split("\n")
         end
         
         @diff_files_res
@@ -46,9 +56,9 @@ class CommitInfoGit < CommitInfo
             file = parts[-1..5]
             
             if status == "A" or status == "C"
-                @new_files_res.push file
-            else if status == "M" or status == "R"
-                @mod_files_res.push file
+                @new_files_res << file.join(" ")
+            elsif status == "M" or status == "R"
+                @mod_files_res << file.join(" ")
             end
         end
     end

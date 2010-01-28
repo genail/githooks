@@ -1,6 +1,6 @@
-require '../lib/test.rb'
-require '../lib/commit_info.rb'
-require '../config/config.rb'
+require 'lib/test.rb'
+require 'lib/commit_info.rb'
+require 'config/config.rb'
 
 class CopyTest < Test
     
@@ -35,18 +35,18 @@ class CopyTest < Test
                     matchb = @@regexb.match(line)
                     
                     if not matcha.nil?
-                        if matcha[2].to_i < @@curr_year
-                        or matcha[1].to_i > matcha[2].to_i
+                        if matcha[2].to_i < @@curr_year or
+                        matcha[1].to_i > matcha[2].to_i
                             error(
-                                entry, line_num,
-                                "invalid copyright entry"
+                                "invalid copyright entry",
+                                entry, line_num
                             )
                         end
                     elsif not matchb.nil?
                         if matchb[1].to_i < @@curr_year
                             error(
-                                entry, line_num,
-                                "invalid copyright entry"
+                                "invalid copyright entry",
+                                entry, line_num
                             )
                         end
                     end

@@ -1,8 +1,8 @@
-require '../lib/test.rb'
-require '../lib/commit_info.rb'
-require '../config/config.rb'
+require 'lib/test.rb'
+require 'lib/commit_info.rb'
+require 'config/config.rb'
 
-class SpaceTest
+class SpaceTest < Test
     def initialize()
         super()
     end
@@ -22,9 +22,9 @@ class SpaceTest
                 file.each_line do |line|
                     if not Config::cnt_allow_tabs
                         if not line.index("\t").nil?
-                            error(
-                                entry, line_num,
-                                "prohibited tab character used"
+                            error(                                
+                                "prohibited tab character used",
+                                entry, line_num
                             );
                         end
                     end
@@ -32,8 +32,8 @@ class SpaceTest
                     if not Config::cnt_allow_trailing_spaces
                         if line.index("  ") == 0
                             error(
-                                entry, line_num,
-                                "trailing spaces not allowed"
+                                "trailing spaces not allowed",
+                                entry, line_num
                             );
                         end
                     end

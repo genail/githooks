@@ -5,17 +5,19 @@ class Test
         @pass = true
     end
     
-    def error(message)
-        puts message
+    def error(message, filename = nil, line = nil)
+        if not line.nil?
+            puts "#{filename}:#{line}: #{message}"
+        elsif not filename.nil?
+            puts "#{filename}: #{message}"
+        else
+            puts message
+        end
+        
         @pass = false
     end
     
-    def error(filename, line, message)
-        puts "#{filename}:#{line}: #{message}"
-        @pass = false
-    end
-    
-    def pass?()
+    def success?()
         @pass
     end
     

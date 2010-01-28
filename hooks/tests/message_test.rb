@@ -1,10 +1,10 @@
-require '../lib/test.rb'
-require '../lib/commit_info.rb'
-require '../config/config.rb'
+require 'lib/test.rb'
+require 'lib/commit_info.rb'
+require 'config/config.rb'
 
 class MessageTest < Test
     def initialize()
-        super.initialize()
+        super()
     end
     
     def perform(commit_info)

@@ -23,6 +23,10 @@ class Config
     
     @@cnt_check_copyright_date = true
     
+    def self.cnt_check_copyright_date
+        @@cnt_check_copyright_date
+    end
+    
     def self.cnt_check_copyright_date=(opt)
         @@cnt_check_copyright_date = opt
     end
@@ -30,11 +34,11 @@ class Config
     
     @@msg_min_words = 3
     
-    def msg_min_words
+    def self.msg_min_words
         @@msg_min_words
     end
     
-    def msg_min_words=(opt)
+    def self.msg_min_words=(opt)
         @@msg_min_words = opt
     end
 end
