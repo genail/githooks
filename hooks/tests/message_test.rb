@@ -14,7 +14,17 @@ class MessageTest < Test
         
         msg = commit_info.commit_message
         
-        if msg.split.size < Config::msg_min_words
+        # remove lines starting with #
+        # and count words
+        word_count = 0
+        
+        msg.split("\n").each do |line|
+            if line[0].chr != '#'
+                word_count = word_count + line.split().size()
+            end
+        end
+        
+        if word_count < Config::msg_min_words
             error("commit message too short");
         end
     end
