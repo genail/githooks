@@ -53,7 +53,7 @@ class CommitInfoGit < CommitInfo
         diff_files().each do |entry|
             parts = entry.split
             status = parts[4]
-            file = parts[-1..5]
+            file = parts[5..-1]
             
             if status == "A" or status == "C"
                 @new_files_res << file.join(" ")
