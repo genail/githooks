@@ -1,5 +1,6 @@
 require 'lib/test.rb'
 require 'lib/commit_info.rb'
+require 'lib/file_utils.rb'
 require 'config/config.rb'
 
 class SpaceTest < Test
@@ -15,6 +16,11 @@ class SpaceTest < Test
         all_files = commit_info.new_files + commit_info.modified_files
         
         all_files.each do |entry|
+        
+            if not FileUtils::source? entry
+                next
+            end
+        
             File.open(entry, "r") do |file|
                 
                 line_num = 1
