@@ -19,7 +19,7 @@ class MessageTest < Test
         word_count = 0
         
         msg.split("\n").each do |line|
-            if line[0].chr != '#'
+            if not line.empty? and line[0].chr != '#'
                 word_count = word_count + line.split().size()
             end
         end
