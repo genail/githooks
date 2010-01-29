@@ -37,10 +37,10 @@ class SpaceTest < Test
                             );
                         end
                     end
+
+                    line_num = line_num + 1
                         
                 end
-                
-                line_num = line_num + 1
                 
             end
         end
