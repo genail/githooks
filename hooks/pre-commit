@@ -5,6 +5,7 @@ $LOAD_PATH << ".git/hooks"
 require 'lib/commit_info_git.rb'
 require 'tests/copy_test.rb'
 require 'tests/space_test.rb'
+require 'tests/line_endings_test.rb'
 
 commit_info = CommitInfoGit.new
 
@@ -12,6 +13,7 @@ tests = []
 
 tests << CopyTest.new
 tests << SpaceTest.new
+tests << LineEndingsTest.new
 
 passed = true
 

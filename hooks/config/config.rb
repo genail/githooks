@@ -41,4 +41,15 @@ class Config
     def self.msg_min_words=(opt)
         @@msg_min_words = opt
     end
+
+    # allowed: :lf, :crlf, :cr
+    @@cnt_line_delimiter = :lf
+
+    def self.cnt_line_delimiter
+        @@cnt_line_delimiter
+    end
+
+    def self.cnt_line_delimiter=(opt)
+        @@cnt_line_delimiter = opt
+    end
 end
