@@ -19,8 +19,8 @@ class LineEndingsTest < Test
                 line_num = 1
                 
                 file.each_line do |line|
-
-                    if line.include?(delimiter)
+                    c = end_of_line_character(line)
+                    if not c.empty? and c != allowed_delimiter
                         error("prohibited end of line character",
                             entry, line_num)
                     end
@@ -31,7 +31,7 @@ class LineEndingsTest < Test
         end
     end
 
-    def delimiter
+    def allowed_delimiter
         case Config::cnt_line_delimiter
         when :lf
             "\n"
@@ -42,5 +42,9 @@ class LineEndingsTest < Test
         else
             raise "unknown line delimiter"
         end
+    end
+
+    def end_of_line_character(line)
+        line.match(/([\r]?[\n]?)$/)[0]
     end
 end
